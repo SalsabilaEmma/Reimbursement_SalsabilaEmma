@@ -31,7 +31,7 @@
                 {{-- @elseif (Auth::user()->jabatan == 'STAFF') --}}
                 {{-- -----------------------------------------------------------------------------------------------------------------< Staff > --}}
                 @endif
-                <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{{ route('pengajuan') }}"><i data-feather="list"> </i><span>Pengajuan Reimbursement</span></a></li>
+                <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{{ route('pengajuan') }}"><i data-feather="list"> </i><span>Reimbursement</span></a></li>
 
                 </ul>
               </div>

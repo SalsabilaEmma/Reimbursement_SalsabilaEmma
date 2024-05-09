@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,8 @@ class UsersController extends Controller
             $karyawan = User::latest()->get();
             return view('users.index', compact('karyawan'));
         } catch (\Exception $e) {
-            return redirect()->route('karyawan')->with('error', $e->getMessage());
+            Log::error("update remburse : " . $e->getMessage());
+            return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");
         }
     }
 
@@ -32,14 +34,13 @@ class UsersController extends Controller
         try {
             if ($id) {
                 $karyawan = User::findOrFail($id);
-                // Tampilkan tampilan dengan data yang akan diedit
                 return view('users.form', compact('karyawan'));
             } else {
                 return view('users.form');
             }
         } catch (\Exception $e) {
-            dd($e);
-            return redirect()->route('pengajuan')->with('error', $e->getMessage());
+            Log::error("update remburse : " . $e->getMessage());
+            return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");
         }
     }
 
@@ -49,7 +50,6 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         try {
-            // dd($request->all());
             $validator = validator::make(
                 $request->all(),
                 [
@@ -81,7 +81,8 @@ class UsersController extends Controller
             event(new Registered($karyawan));
             return redirect(route('karyawan'))->with('success', 'Data Berhasil Ditambahkan!');
         } catch (\Exception $e) {
-            return redirect()->route('karyawan')->with('error', $e->getMessage());
+            Log::error("update remburse : " . $e->getMessage());
+            return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");
         }
     }
 
@@ -121,7 +122,8 @@ class UsersController extends Controller
             ]);
             return redirect(route('karyawan'))->with('success', 'Data berhasil diperbarui!');
         } catch (\Exception $e) {
-            return redirect()->route('karyawan')->with('error', $e->getMessage());
+            Log::error("update remburse : " . $e->getMessage());
+            return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");
         }
     }
 
@@ -134,7 +136,8 @@ class UsersController extends Controller
             User::destroy($id);
             return redirect()->route('karyawan')->with('success', 'Data Berhasil Dihapus!');
         } catch (\Exception $e) {
-            return redirect()->route('karyawan')->with('error', $e->getMessage());
+            Log::error("update remburse : " . $e->getMessage());
+            return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");
         }
     }
 }

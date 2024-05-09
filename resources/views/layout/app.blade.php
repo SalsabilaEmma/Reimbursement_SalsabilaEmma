@@ -9,8 +9,6 @@
     <meta name="keywords" content="Mars Office">
     <meta name="author" content="pixelstrap">
     <meta name="cuba-url" content="{{ url('cuba') }}">
-    <link rel="icon" href="{{ url('image') }}/logo.png" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ url('image') }}/logo.png" type="image/x-icon">
     <title>Reimbursement Project - Salsabila Emma</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
@@ -18,20 +16,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/font-awesome.css">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/icofont.css">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/themify.css">
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/flag-icon.css">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/feather-icon.css">
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/sweetalert2.css">
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/scrollbar.css">
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/animate.css">
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/chartist.css">
-    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/date-picker.css">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/bootstrap.css">
@@ -46,7 +30,7 @@
     @yield('css')
 </head>
 
-<body onload="startTime()">
+<body>
     <!-- loader starts-->
     <div class="loader-wrapper">
         <div class="loader-index"><span></span></div>
@@ -99,26 +83,6 @@
     <script src="{{ url('cuba') }}/assets/js/scrollbar/custom.js"></script>
     <!-- Sidebar jquery-->
     <script src="{{ url('cuba') }}/assets/js/config.js"></script>
-    <!-- Plugins JS start-->
-    <script src="{{ url('cuba') }}/assets/js/sidebar-menu.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/sweet-alert/sweetalert.min.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/chart/chartist/chartist.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/chart/chartist/chartist-plugin-tooltip.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/chart/knob/knob.min.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/chart/knob/knob-chart.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/chart/apex-chart/apex-chart.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/chart/apex-chart/stock-prices.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/notify/bootstrap-notify.min.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/dashboard/default.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/notify/index.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/datepicker/date-picker/datepicker.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/datepicker/date-picker/datepicker.en.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/typeahead/handlebars.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/typeahead/typeahead.bundle.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/typeahead/typeahead.custom.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/typeahead-search/handlebars.js"></script>
-    <script src="{{ url('cuba') }}/assets/js/typeahead-search/typeahead-custom.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ url('cuba') }}/assets/js/script.js"></script>
