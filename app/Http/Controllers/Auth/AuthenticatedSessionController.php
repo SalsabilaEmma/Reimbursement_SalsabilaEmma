@@ -12,6 +12,14 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+    protected $redirectTo = '/dashboard';
+    protected function redirectTo()
+    {
+        if (auth()->user()->jabatan == 'DIREKTUR') {
+            return route('dashboard');
+        }
+        return '/';
+    }
     /**
      * Display the login view.
      */
@@ -29,7 +37,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->route('dashboard');
     }
 
     /**

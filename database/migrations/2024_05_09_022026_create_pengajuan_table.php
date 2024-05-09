@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pengajuan', function (Blueprint $table) {
             $table->id();
-            $table->string('nip')->nullable();
+            $table->date('tgl')->nullable();
             $table->string('nama')->nullable();
-            $table->string('jabatan')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->text('deskripsi')->nullable();
+            $table->string('fileType')->nullable();
+            $table->enum('status', [0, 1, 2])->default(0);
+            $table->enum('statusReimburse', [0, 1, 2])->default(0);
+            $table->longText('file')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pengajuan');
     }
 };
