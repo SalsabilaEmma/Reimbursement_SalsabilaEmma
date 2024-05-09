@@ -53,11 +53,16 @@ class UsersController extends Controller
             $validator = validator::make(
                 $request->all(),
                 [
-                    'nip' => ['required', 'string', 'max:255', 'unique:' . User::class],
-                    'nama' => ['required', 'string', 'max:255'],
-                    // 'jabatan' => ['required', 'string', 'max:255'],
-                    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                    'nip' => ['required', 'numeric', 'unique:' . User::class],
+                    'nama' => ['required', 'string'],
+                    'email' => ['required',  'email', 'unique:' . User::class],
                     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                ],
+                [
+                    'nip.numeric' => 'NIP Harus Berupa Angka',
+                    'nip.unique' => 'Email Sudah Terdaftar',
+                    'email.email' => 'Email Harus Berformat test@gmail.com',
+                    'email.unique' => 'Email Sudah Terdaftar',
                 ]
             );
             if ($validator->fails()) {
@@ -89,11 +94,16 @@ class UsersController extends Controller
             $validator = validator::make(
                 $request->all(),
                 [
-                    'nip' => ['required', 'string', 'max:255'],
-                    'nama' => ['required', 'string', 'max:255'],
-                    // 'jabatan' => ['required', 'string', 'max:255'],
-                    'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+                    'nip' => ['required', 'numeric', 'unique:' . User::class],
+                    'nama' => ['required', 'string'],
+                    'email' => ['required',  'email', 'unique:' . User::class],
                     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                ],
+                [
+                    'nip.numeric' => 'NIP Harus Berupa Angka',
+                    'nip.unique' => 'Email Sudah Terdaftar',
+                    'email.email' => 'Email Harus Berformat test@gmail.com',
+                    'email.unique' => 'Email Sudah Terdaftar',
                 ]
             );
             if ($validator->fails()) {

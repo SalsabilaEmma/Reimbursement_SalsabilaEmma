@@ -40,15 +40,14 @@ class PengajuanController extends Controller
     public function form($id = null)
     {
         try {
-            $dataKaryawan = User::all();
             $timezone = Carbon::now();
             $timezone->timezone = 'Asia/Jakarta';
             $time = $timezone->toTimeString();
             if ($id) {
                 $pengajuan = Pengajuan::findOrFail($id);
-                return view('pengajuan.form', compact('pengajuan', 'dataKaryawan'));
+                return view('pengajuan.form', compact('pengajuan'));
             } else {
-                return view('pengajuan.form', compact('timezone', 'time', 'dataKaryawan'));
+                return view('pengajuan.form', compact('timezone', 'time'));
             }
         } catch (\Exception $e) {
             dd($e);
@@ -66,7 +65,12 @@ class PengajuanController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'tgl' => ['required', 'max:255']
+                    'tgl' => ['required', 'date'],
+                    'file' => ['required', 'file', 'mimetypes:image/jpeg,image/png,image/jpg,application/pdf'],
+                    'deskripsi' => ['required'],
+                ],
+                [
+                    'file.mimetypes' => 'File Harus Berformat .jpeg, .jpg, .png atau pdf',
                 ]
             );
             if ($validator->fails()) {
@@ -115,7 +119,7 @@ class PengajuanController extends Controller
             $validator = validator::make(
                 $request->all(),
                 [
-                    'tgl' => ['required', 'max:255']
+                    'tgl' => ['required']
                 ]
             );
             if ($validator->fails()) {
@@ -147,10 +151,10 @@ class PengajuanController extends Controller
             }
 
             $dataToUpdateDirektur = [
-                'status' => $request->input('status'),
+                'status' => $request->input('status_select'),
             ];
             $dataToUpdateFinance = [
-                'statusReimburse' => $request->input('statusReimburse'),
+                'statusReimburse' => $request->input('statusReimburse_select'),
             ];
             if (Auth::user()->jabatan === 'DIREKTUR') {
                 // dd('masuk direktur');

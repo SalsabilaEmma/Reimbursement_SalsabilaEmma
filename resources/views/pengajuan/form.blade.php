@@ -92,29 +92,29 @@
                               <input class="form-control" type="deskripsi" rows="3" required name="deskripsi" name="deskripsi" value={{ isset($pengajuan) ? $pengajuan->deskripsi : '' }}  {{ Auth::user()->jabatan !== 'staff' && isset($pengajuan) ? 'readonly' : '' }}>
                             </div>
                         </div>
-                        {{-- @if (Auth::user()->jabatan === 'DIREKTUR') --}}
+                        @if (Auth::user()->jabatan !== 'STAFF')
                             <div class="col-lg-6 col-sm-6">
                                 <div class="mb-2">
                                     <label class="col-form-label">Status Direktur</label>
-                                    <select class="form-control" name="status" required  {{ Auth::user()->jabatan !== 'DIREKTUR' && isset($pengajuan) ? 'disabled' : '' }}>
+                                    <select class="form-control" name="status_select" required  {{ Auth::user()->jabatan !== 'DIREKTUR' && isset($pengajuan) ? 'disabled' : '' }}>
                                         <option value="0" {{ isset($pengajuan) && $pengajuan->status === "0" ? 'selected' : '' }}>Belum Disetujui</option>
                                         <option value="1" {{ isset($pengajuan) && $pengajuan->status === "1" ? 'selected' : '' }}>Disetujui</option>
                                         <option value="2" {{ isset($pengajuan) && $pengajuan->status === "2" ? 'selected' : '' }}>Ditolak</option>
                                     </select>
-                                    <input type="hidden" name="status" id="status" value="{{ isset($pengajuan) ? $pengajuan->status : '' }}">
+                                    <input type="hidden" name="status" id="status" value="{{ isset($pengajuan) ? $pengajuan->status : '0' }}">
                                 </div>
                             </div>
-                        {{-- @endif --}}
+                        @endif
                         @if (Auth::user()->jabatan === 'FINANCE')
                             <div class="col-lg-6 col-sm-6">
                                 <div class="mb-2">
                                     <label class="col-form-label">Status Reimbursement</label>
-                                    <select class="form-control" name="statusReimburse" required {{ Auth::user()->jabatan !== 'FINANCE' && isset($pengajuan) ? 'disabled' : '' }}>
+                                    <select class="form-control" name="statusReimburse_select" required {{ Auth::user()->jabatan !== 'FINANCE' && isset($pengajuan) ? 'disabled' : '' }}>
                                         <option value="0" {{ isset($pengajuan) && $pengajuan->statusReimburse === "0" ? 'selected' : '' }}>Proses</option>
                                         <option value="1" {{ isset($pengajuan) && $pengajuan->statusReimburse === "1" ? 'selected' : '' }}>Sudah Dicairkan</option>
                                         <option value="2" {{ isset($pengajuan) && $pengajuan->statusReimburse === "2" ? 'selected' : '' }}>Ditolak</option>
                                     </select>
-                                    <input type="hidden" name="status" id="status" value="{{ isset($pengajuan) ? $pengajuan->statusReimburse : '' }}">
+                                    <input type="hidden" name="status" id="status" value="{{ isset($pengajuan) ? $pengajuan->statusReimburse : '0' }}">
                                 </div>
                             </div>
                         @endif

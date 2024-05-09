@@ -26,13 +26,13 @@
               </li>
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" src="{{ url('cuba') }}/assets/images/dashboard/profile.jpg" alt="">
+                <div class="media profile-media"><img class="b-r-10" src="{{ url('cuba') }}/assets/images/epg" alt="">
                   <div class="media-body"><span>{{ Auth::user()->nama }}</span>
                     <p class="mb-0 font-roboto">{{ Auth::user()->jabatan }} <i class="middle fa fa-angle-down"></i></p>
                   </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
-                  <li><a href="#"><i data-feather="user"></i><span>Profile </span></a></li>
+                  {{-- <li><a href="#"><i data-feather="user"></i><span>Profile </span></a></li> --}}
                     <li> <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-out"></i>Logout</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
