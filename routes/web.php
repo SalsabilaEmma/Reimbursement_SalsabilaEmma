@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::middleware('auth')->group(function () {
     // ----------------------------------------------------------------------------------------------------------------------------< Direktur >
     Route::group(['middleware' => ['direktur']], function () {
