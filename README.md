@@ -22,13 +22,19 @@ Persiapan Awal:
 4. Salin file .env.example menjadi .env.
 5. Konfigurasi file .env
 6. Jalankan perintah – perintah berikut:
-   • php artisan key:generate
-   • composer install
-   • composer update
+    ```sh
+    • php artisan key:generate
+    • composer install
+    • composer update
+    ```
 7. Jalankan migrasi untuk membuat table
-   • Buat database terlebih dahulu di server database dengan nama reimbursement_salsabila
-   • php artisan migrate
-   • php artisan db:seed
+    ```sh
+    • Buat database terlebih dahulu di server database dengan nama reimbursement_salsabila
+    • php artisan migrate
+    • php artisan db:seed
+    ```
 8. Setelah instalasi selesai, jalankan menggunakan perintah
-   • npm run build
-   • php artisan serve
+    ```sh
+    • npm run build
+    • php artisan serve
+    ```
