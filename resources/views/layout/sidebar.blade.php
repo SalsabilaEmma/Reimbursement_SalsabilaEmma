@@ -6,7 +6,7 @@
 </style>
 <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper"><a href="{{ route('dashboard') }}"><img class="img-fluid for-light" src="{{ url('cuba') }}/assets/images/favicon.png" alt=""><img class="img-fluid for-dark" src="{{ url('cuba') }}/assets/images/logo/logo_dark.png" alt=""></a>
+            <div class="logo-wrapper"><a href="{{ route('dashboard') }}"><img class="img-fluid for-light" src="{{ url('cuba') }}/assets/images/favicon.png" alt=""><img class="img-fluid for-dark" src="{{ url('cuba') }}/assets/images/favicon.png" alt=""></a>
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
               <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
             </div>
@@ -33,6 +33,13 @@
                 @endif
                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{{ route('pengajuan') }}"><i data-feather="list"> </i><span>Reimbursement</span></a></li>
 
+                    <li> <a href="{{ route('logout') }}" class="sidebar-link sidebar-title link-nav"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="sign-out"
+                            data-feather="log-out"></i>Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
                 </ul>
               </div>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

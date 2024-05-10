@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mars Office">
-    <meta name="keywords" content="Mars Office">
+    <meta name="description" content="Mini Penugasan Reimbursement - Salsabila Emma">
+    <meta name="keywords" content="Mini Penugasan Reimbursement - Salsabila Emma">
     <meta name="author" content="pixelstrap">
     <meta name="cuba-url" content="{{ url('cuba') }}">
     <title>Reimbursement Project - Salsabila Emma</title>
@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/font-awesome.css">
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/sweetalert2.css">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ url('cuba') }}/assets/css/vendors/bootstrap.css">
@@ -83,6 +85,11 @@
     <script src="{{ url('cuba') }}/assets/js/scrollbar/custom.js"></script>
     <!-- Sidebar jquery-->
     <script src="{{ url('cuba') }}/assets/js/config.js"></script>
+    <!-- Plugins JS start-->
+    <script src="{{ url('cuba') }}/assets/js/sidebar-menu.js"></script>
+    <script src="{{ url('cuba') }}/assets/js/sweet-alert/sweetalert.min.js"></script>
+    <script src="{{ url('cuba') }}/assets/js/notify/bootstrap-notify.min.js"></script>
+    <script src="{{ url('cuba') }}/assets/js/notify/index.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ url('cuba') }}/assets/js/script.js"></script>

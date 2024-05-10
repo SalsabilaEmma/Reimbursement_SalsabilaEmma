@@ -49,6 +49,13 @@
                     @csrf
                   <h4>Sign in to account</h4>
                   <p>Enter your NIP & password to login</p>
+                  @if ($message = Session::get('error'))
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          {{ $message }}
+                          <button class="btn-close" type="button" data-bs-dismiss="alert"
+                              aria-label="Close"></button>
+                      </div>
+                  @endif
                   <div class="form-group">
                     <label class="col-form-label">NIP</label>
                     <input class="form-control" type="text" required="" placeholder="****" name="nip" id="nip" required autofocus autocomplete="nip">
