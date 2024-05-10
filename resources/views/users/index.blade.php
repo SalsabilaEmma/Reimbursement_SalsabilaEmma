@@ -54,13 +54,13 @@
                                 {{-- <td>{{ $item->password }}</td> --}}
                                 <td class="text-center">
                                     <a href="{{ route('karyawan.form', $item->id) }}">
-                                        <button title="Edit" type="button" class="btn btn-xs btn-warning mb-2">
+                                        <button title="Edit" type="button" class="btn btn-xs btn-warning mb-2">Edit
                                             <i class="icon-pencil-alt"></i>
                                         </button>
                                     </a>
                                     <form action="{{ route('karyawan.delete', $item->id) }}" onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST">
                                         @csrf
-                                        <button title="Hapus" class="btn btn-xs btn-danger" type="submit">
+                                        <button title="Hapus" class="btn btn-xs btn-danger" type="submit">Delete
                                             <i class="icon-trash"></i>
                                         </button>
                                     </form>

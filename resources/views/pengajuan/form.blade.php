@@ -13,7 +13,7 @@
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="">Form Pengajuan Reimbursement</h5>
+              <h5 class="">Form Reimbursement</h5>
               {{-- <span>Data Client</span> --}}
             </div>
             <div class="card-body">
@@ -53,10 +53,10 @@
                                 @if (isset($pengajuan))
                                     @if($pengajuan->file)
                                         @if ($pengajuan->fileType == 'image')
-                                            <img src="data:image/jpeg;base64,{{ $pengajuan->file }}" style="max-width: 100px; max-height: 100px;" alt="File">
+                                            <img src="{{ asset('file/' . $pengajuan->file ) }}" style="max-width: 100px; max-height: 100px;" alt="File">
                                         @else
                                             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal-{{ $pengajuan->id }}">
-                                                Buka File Lama
+                                                Preview File
                                             </button>
                                             <div class="modal fade" id="exampleModal-{{ $pengajuan->id }}" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -67,7 +67,7 @@
                                                             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <embed src="data:application/pdf;base64,{{ $pengajuan->file }}" type="application/pdf" style="width: 100%; height: 500px;">
+                                                            <embed src="{{ asset('file/' . $pengajuan->file ) }}" type="application/pdf" style="width: 100%; height: 500px;">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button>

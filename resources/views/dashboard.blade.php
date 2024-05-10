@@ -11,7 +11,7 @@
   <!-- Container-fluid starts-->
   <div class="container-fluid">
     <div class="row second-chart-list third-news-update">
-      <div class="col-xl-12 col-lg-12 xl-50 morning-sec box-col-12">
+      <div class="col-xl-6 col-lg-6 xl-50 morning-sec box-col-6">
         <div class="card profile-greeting">
           <div class="card-body pb-0">
             <div class="media">
@@ -30,7 +30,25 @@
           </div>
         </div>
       </div>
-
+      <div class="col-xl-6 col-lg-6 xl-50 morning-sec box-col-6">
+        <div class="card profile-greeting">
+          <div class="card-body pb-0">
+            <div class="media">
+              <div class="media-body text-center">
+                <div class="greeting-user mb-4">
+                    @if (Auth::user()->jabatan == 'DIREKTUR')
+                        <div class="whatsnew-btn"><a class="btn btn-primary" href="{{ route('karyawan') }}">Karyawan</a></div>
+                    @endif
+                </div>
+                <div class="greeting-user mb-4">
+                    <div class="whatsnew-btn"><a class="btn btn-primary" href="{{ route('pengajuan') }}">Reimbursement</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
   </div>
   <!-- Container-fluid Ends-->

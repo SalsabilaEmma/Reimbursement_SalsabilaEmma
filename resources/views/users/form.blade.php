@@ -68,13 +68,13 @@
                         <div class="col-lg-6 col-sm-6">
                           <div class="mb-2">
                             <label>Password</label>
-                            <input class="form-control" name="password" required id="" type="text" value="{{ isset($karyawan) ? $karyawan->password : '' }}">
+                            <input class="form-control" name="password" required id="" type="text" value="{{ isset($karyawan) ? '' : '' }}">
                           </div>
                         </div>
                         <div class="col-lg-6 col-sm-6">
                           <div class="mb-2">
                             <label>Confirm Password</label>
-                            <input class="form-control" name="password_confirmation" required id="" type="text" value="{{ isset($karyawan) ? $karyawan->password : '' }}">
+                            <input class="form-control" name="password_confirmation" required id="" type="text" value="{{ isset($karyawan) ? '' : '' }}">
                           </div>
                         </div>
                     </div>

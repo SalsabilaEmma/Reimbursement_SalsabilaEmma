@@ -21,7 +21,6 @@ Persiapan Awal:
 3. Masuk ke direktori proyek yang telah di clone
 4. Salin file .env.example menjadi .env.
 5. Konfigurasi file .env
-
 6. Jalankan perintah – perintah berikut:
    • php artisan key:generate
    • composer install

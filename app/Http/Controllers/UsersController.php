@@ -53,10 +53,10 @@ class UsersController extends Controller
             $validator = validator::make(
                 $request->all(),
                 [
-                    'nip' => ['required', 'numeric', 'unique:' . User::class],
-                    'nama' => ['required', 'string'],
-                    'email' => ['required',  'email', 'unique:' . User::class],
-                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                    'nip' => ['numeric', 'unique:' . User::class],
+                    'nama' => ['string'],
+                    'email' => ['email', 'unique:' . User::class],
+                    'password' => ['confirmed', Rules\Password::defaults()],
                 ],
                 [
                     'nip.numeric' => 'NIP Harus Berupa Angka',
@@ -95,16 +95,14 @@ class UsersController extends Controller
             $validator = validator::make(
                 $request->all(),
                 [
-                    'nip' => ['required', 'numeric', 'unique:' . User::class],
-                    'nama' => ['required', 'string'],
-                    'email' => ['required',  'email', 'unique:' . User::class],
-                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                    'nip' => ['numeric'],
+                    'nama' => ['string'],
+                    'email' => ['email'],
+                    'password' => ['confirmed', Rules\Password::defaults()],
                 ],
                 [
                     'nip.numeric' => 'NIP Harus Berupa Angka',
-                    'nip.unique' => 'Email Sudah Terdaftar',
                     'email.email' => 'Email Harus Berformat test@gmail.com',
-                    'email.unique' => 'Email Sudah Terdaftar',
                 ]
             );
             if ($validator->fails()) {

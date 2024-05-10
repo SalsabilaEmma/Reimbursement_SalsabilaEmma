@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+// use Intervention\Image\Image;
+// use Image;
+use Intervention\Image\ImageManagerStatic as Image;
+
+
 
 class PengajuanController extends Controller
 {
@@ -65,8 +70,8 @@ class PengajuanController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'tgl' => ['required', 'date'],
-                    'file' => ['required', 'file', 'mimetypes:image/jpeg,image/png,image/jpg,application/pdf'],
+                    'tgl' => ['date'],
+                    'file' => ['file', 'mimetypes:image/jpeg,image/png,image/jpg,application/pdf'],
                     'deskripsi' => ['required'],
                 ],
                 [
@@ -84,19 +89,41 @@ class PengajuanController extends Controller
 
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
-                $mimeType = $file->getMimeType();
-                $base64File = base64_encode(file_get_contents($file));
-                $fileType = strpos($mimeType, 'image/') !== false ? 'image' : 'pdf';
-                $pengajuan->file_type = $fileType;
-                $pengajuan->file = $base64File;
+
+                if ($file->getClientOriginalExtension() == 'pdf') {
+                    // If it's a PDF file, move it to the file directory
+                    // $namafile = time() . '.' . $file->getClientOriginalExtension();
+                    // $file->move('file/' . $namafile);
+                    $namafile = time() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('file'), $namafile);
+                    $pengajuan->file = $namafile;
+                    $pengajuan->fileType = 'pdf';
+                } elseif (in_array($file->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'gif', 'bmp'])) {
+                    // If it's an image file, resize and save it
+                    if (!File::isDirectory('file/' . $request->id)) {
+                        File::makeDirectory('file/' . $request->id);
+                    }
+                    $namafile = time() . '.' . $file->getClientOriginalExtension();
+                    Image::make($file)->resize(300, 300, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save('file/' . $namafile);
+                    // Save the original image file
+                    $file->move('file-original/' . $namafile);
+                    $pengajuan->file = $namafile;
+                    $pengajuan->fileType = 'image';
+                } else {
+                    // Handle other file types here if needed
+                }
             }
 
+            // dd($pengajuan);
             $pengajuan->save();
 
             return redirect(route('pengajuan'))->with('success', 'Data Berhasil Ditambahkan!');
         } catch (\Exception $e) {
+            dd($e);
             Log::error("update remburse : " . $e->getMessage());
-            return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");
+            return redirect()->route('pengajuan.form')->with('error', "Telah terjadi kesalahan");
         }
     }
 
@@ -124,20 +151,30 @@ class PengajuanController extends Controller
                 'deskripsi' => $request->input('deskripsi'),
             ];
             if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $mimeType = $file->getMimeType();
-
-                $base64File = base64_encode(File::get($file));
-                $fileType = 'image';
-
-                if (strpos($mimeType, 'image/') !== false) {
-                    $fileType = 'image';
-                } else {
-                    $fileType = 'pdf';
+                $filePath = public_path('file/' . $pengajuan->file);
+                if (File::exists($filePath)) {
+                    File::delete($filePath);
                 }
 
-                $dataToUpdate['fileType'] = $fileType;
-                $dataToUpdate['file'] = $base64File;
+                $file = $request->file('file');
+                if ($file->getClientOriginalExtension() == 'pdf') {
+                    $namafile = time() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('file'), $namafile);
+                    $pengajuan->file = $namafile;
+                    $pengajuan->fileType = 'pdf';
+                } else {
+                    // If it's an image file, resize and save it
+                    if (!File::isDirectory('file/' . $request->id)) {
+                        File::makeDirectory('file/' . $request->id);
+                    }
+                    $namafile = time() . '.' . $file->getClientOriginalExtension();
+                    Image::make($file)->resize(300, 300, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save('file/' . $namafile);
+                    $file->move('file-original/' . $namafile);
+                    $pengajuan->file = $namafile;
+                    $pengajuan->fileType = 'image';
+                }
             }
 
             $dataToUpdateDirektur = [
@@ -167,23 +204,16 @@ class PengajuanController extends Controller
     public function destroy(string $id)
     {
         try {
-            Pengajuan::destroy($id);
+            // Pengajuan::destroy($id);
+            $pengajuan = Pengajuan::findOrFail($id);
+            if ($pengajuan->file) {
+                $filePath = public_path('file/' . $pengajuan->file);
+                if (File::exists($filePath)) {
+                    File::delete($filePath);
+                }
+            }
+            $pengajuan->delete();
             return redirect()->route('pengajuan')->with('success', 'Data Berhasil Dihapus!');
-        } catch (\Exception $e) {
-            Log::error("update remburse : " . $e->getMessage());
-            return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");
-        }
-    }
-
-    // --------------------------------------------------------------------------------------------------------< Direktur >
-
-    // --------------------------------------------------------------------------------------------------------< Finance >
-    public function indexFinance()
-    {
-        try {
-            $nama = Auth::user()->nama;
-            $pengajuan = Pengajuan::where('status', "1")->latest()->get();
-            return view('pengajuan.index', compact('pengajuan'));
         } catch (\Exception $e) {
             Log::error("update remburse : " . $e->getMessage());
             return redirect()->route('pengajuan')->with('error', "Telah terjadi kesalahan");

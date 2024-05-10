@@ -53,10 +53,10 @@
                                 <td class="text-center">{{ $item->tgl }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->deskripsi }}</td>
-                                <td>
+                                <td class="text-center">
                                     @if($item->file)
                                         @if ($item->fileType == 'image')
-                                            <img src="data:image/jpeg;base64,{{ $item->file }}" style="max-width: 100px; max-height: 100px;" alt="File">
+                                            <img src="{{ asset('file/' . $item->file ) }}" style="max-width: 100px; max-height: 100px;" alt="File">
                                         @else
                                             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal-{{ $loop->iteration }}">
                                                 Buka File
@@ -71,7 +71,7 @@
                                                             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <embed src="data:application/pdf;base64,{{ $item->file }}" type="application/pdf" style="width: 100%; height: 500px;">
+                                                            <embed src="{{ asset('file/' . $item->file ) }}" type="application/pdf" style="width: 100%; height: 500px;">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button>
@@ -104,14 +104,14 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('pengajuan.form', $item->id) }}">
-                                        <button title="Edit" type="button" class="btn btn-xs btn-warning mb-2">
+                                        <button title="Edit" type="button" class="btn btn-xs btn-warning mb-2">Edit
                                             <i class="icon-pencil-alt"></i>
                                         </button>
                                     </a>
                                     @if (Auth::user()->jabatan === "STAFF")
                                         <form action="{{ route('pengajuan.delete', $item->id) }}" onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST">
                                             @csrf
-                                            <button title="Hapus" class="btn btn-xs btn-danger" type="submit">
+                                            <button title="Hapus" class="btn btn-xs btn-danger" type="submit">Delete
                                                 <i class="icon-trash"></i>
                                             </button>
                                         </form>
@@ -121,21 +121,6 @@
                         @endforeach
                     </tbody>
                   </table>
-                  <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <h5 class="modal-title" id="fileModalLabel">Preview File</h5>
-                                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                  <embed id="fileEmbed" src="" type="application/pdf" style="width: 100%; height: 500px;">
-                                  <!-- Atau gunakan <iframe> jika lebih sesuai -->
-                                  <!-- <iframe id="fileIframe" src="" style="width: 100%; height: 500px;" frameborder="0"></iframe> -->
-                              </div>
-                          </div>
-                      </div>
-                  </div>
                 </div>
             </div>
           </div>

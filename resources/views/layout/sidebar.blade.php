@@ -20,8 +20,8 @@
                   </li>
                   <li class="sidebar-main-title">
                     <div>
-                      <h6 class="lan-8">Dashboard</h6>
-                      <p class="lan-9">Ready to use Apps</p>
+                      <h6>Dashboard</h6>
+                      <p>Reimbursement - Salsabila Emma</p>
                     </div>
                   </li>
 
